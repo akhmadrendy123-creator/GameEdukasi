@@ -1,0 +1,189 @@
+/* --- SETTING DASAR (FULL SCREEN) --- */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden; /* Mencegah scrollbar muncul */
+}
+
+#game-container {
+    width: 100vw;  /* 100% Lebar Layar */
+    height: 100vh; /* 100% Tinggi Layar */
+    
+    background-image: url('Aset/latar.png'); 
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- LANTAI --- */
+#game-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #4c5c4c; 
+    z-index: 1;
+    border-top: 3px solid #2d382d;
+}
+
+/* --- AKTOR / PLAYER --- */
+#actor {
+    width: 100px;
+    height: 100px;
+    
+    background-color: transparent; 
+    background-image: url('Aset/karakter_diam-removebg-preview.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    
+    transition: transform 0.1s; 
+    z-index: 10; 
+}
+
+/* --- PIJAKAN / PLATFORM (BARU DITAMBAHKAN) --- */
+.platform {
+    position: absolute;
+    height: 30px; /* Tebal pijakan */
+    
+    /* Ganti warna background dengan Gambar Asetmu */
+    background-color: transparent;
+    background-image: url('Aset/pijakan.png'); /* Pastikan file ini ada! */
+    
+    /* Agar gambar berulang ke samping (pola) dan tidak gepeng */
+    background-size: auto 100%; 
+    background-repeat: repeat-x;
+    
+    z-index: 5;
+    border-radius: 5px;
+    filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.5)); /* Bayangan */
+}
+
+/* --- ITEM (SOAL & JAWABAN) --- */
+.item {
+    width: 70px;
+    height: 70px;
+    
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    
+    /* Font Setting */
+    font-weight: bold;
+    font-size: 40px; /* Saya kecilkan sedikit dari 40px agar pecahan muat */
+    color: white;
+    
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 5;
+    text-align: center;
+}
+
+/* Desain Kotak Soal */
+.soal-item { 
+    background-color: transparent; 
+    background-image: url('Aset/box.svg'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    /* Text Shadow agar tanda tanya terbaca jelas */
+    text-shadow: 2px 2px 2px black;
+}
+
+/* Desain Kotak Jawaban */
+.jawaban-item { 
+    background-color: rgb(255, 230, 0);
+    border: 2px solid white;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+/* --- GAYA PECAHAN (BARU DITAMBAHKAN) --- */
+/* Agar tulisan "1/2" jadi susun atas-bawah */
+.pecahan {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 20px; /* Ukuran khusus pecahan agar pas di kotak */
+    line-height: 1;
+}
+
+.angka-atas {
+    border-bottom: 2px solid white; /* Garis Per */
+    padding: 0 4px;
+    display: block;
+}
+
+.angka-bawah {
+    padding-top: 2px;
+    display: block;
+}
+
+/* --- UI (SKOR & PERTANYAAN) --- */
+#ui-layer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#score-display {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+}
+
+#question-display {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    border: 2px solid #333;
+    max-width: 600px;
+}
+
+/* --- ANIMASI SPRITE --- */
+
+/* Animasi Lari */
+.animasi-lari {
+    background-image: url('Aset/20251215_150118_0000.png') !important; 
+    background-size: 600px 100px !important; 
+    background-repeat: no-repeat !important;
+    animation: lari-gerak 0.8s steps(6) infinite; 
+}
+
+@keyframes lari-gerak {
+    from { background-position: 0px; }
+    to { background-position: -600px; } 
+}
+
+/* Animasi Lompat */
+.animasi-lompat {
+    background-image: url('Aset/20251215_150610_0000.png') !important;
+    background-size: 600px 100px !important; 
+    background-repeat: no-repeat !important;
+    animation: lompat-gerak 1s steps(6) infinite;
+}
+
+@keyframes lompat-gerak {
+    from { background-position: 0px; }
+    to { background-position: -600px; }
+}
